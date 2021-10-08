@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campanha;
 use App\Models\Cidade;
 use App\Models\GruposCidade;
 use Illuminate\Http\Request;
@@ -9,6 +10,31 @@ use Illuminate\Http\Request;
 
 class GruposCidadeController extends Controller
 {
+    /**
+     * Adiciona uma campanha a um grupo se ele existir e se não tiver
+     * 
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
+    public function add_campanha($g_id, $c_id)
+    {
+        $g = GruposCidade::findOrFail($g_id);
+        $c = Campanha::findOrFail($c_id);
+
+        if ($c->grupo_id){
+            $c->update([
+                'grupo_id' => null
+            ]);
+        }
+
+        $c->update([
+            'grupo_id' => $g_id
+        ]);
+
+        redirect()->route('campanhas.show', $c_id);
+    }
+
     /**
      * Display a listing of the resource.
      *

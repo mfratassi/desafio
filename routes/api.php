@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CampanhaController;
 use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\DescontoController;
 use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\GruposCidadeController;
 use App\Http\Controllers\ProdutoController;
+use App\Models\Campanha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +25,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::post('grupos/{grupo}/add_campanha/{campanha}', [GruposCidadeController::class, 'add_campanha']);
 Route::apiResource('grupos', GruposCidadeController::class);
 Route::apiResource('cidades', CidadeController::class);
 Route::apiResource('estados', EstadoController::class);
+Route::apiResource('campanhas', CampanhaController::class);
 Route::apiResource('produtos', ProdutoController::class);
 Route::apiResource('desconto', DescontoController::class);
 

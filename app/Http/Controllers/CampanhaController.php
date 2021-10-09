@@ -3,10 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campanha;
+use App\Models\Desconto;
+use App\Models\DescontoProduto;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 
 class CampanhaController extends Controller
 {
+
+    public function add_produto($campanha, $produto)
+    {
+        $vl = Produto::find($produto)->valor;
+        $dp = DescontoProduto::create([
+            'campanha_id' => $campanha, 
+            'produto_id' => $produto
+        ]);
+        return redirect()->route('campanhas.show', $campanha);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,13 +28,11 @@ class CampanhaController extends Controller
      */
     public function index()
     {
-        $c = Campanha::with([
+        return Campanha::with([
             'descontoproduto',
             'descontoproduto.produto', 
             'descontoproduto.desconto'
         ])->get();
-
-        return $c;
     }
 
     /**
@@ -44,13 +56,11 @@ class CampanhaController extends Controller
      */
     public function show($id)
     {
-        $c = Campanha::with([
+        return Campanha::with([
             'descontoproduto',
             'descontoproduto.produto', 
             'descontoproduto.desconto'
-        ])->find($id);
-
-        return $c;
+        ])->findOrFail($id);
     }
 
     /**

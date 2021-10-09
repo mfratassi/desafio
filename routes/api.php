@@ -29,6 +29,7 @@ Route::post('grupos/{grupo}/add_campanha/{campanha}', [GruposCidadeController::c
 Route::apiResource('grupos', GruposCidadeController::class);
 Route::apiResource('cidades', CidadeController::class);
 Route::apiResource('estados', EstadoController::class);
+Route::post('campanhas/{campanha}/add_produto/{produto}', [CampanhaController::class, 'add_produto']);
 Route::apiResource('campanhas', CampanhaController::class);
 Route::apiResource('produtos', ProdutoController::class);
 Route::apiResource('desconto', DescontoController::class);

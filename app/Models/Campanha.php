@@ -14,14 +14,7 @@ class Campanha extends Model
     {
         return $this->belongsTo(GruposCidade::class, 'grupo_id', 'id');
     }
-
-    // public function produtos()
-    // {
-    //     return $this->belongsToMany(Produto::class, 'campanha_produtos', 'campanha_id', 'produto_id')
-    //         ->as('campanha_produtos')
-    //         ->withPivot('id', 'valorComDesconto');
-    // }
-
+    
     public function descontoproduto()
     {
         return $this->hasMany(DescontoProduto::class);

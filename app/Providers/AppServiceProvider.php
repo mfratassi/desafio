@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Desconto;
+use App\Models\DescontoProduto;
+use App\Observers\DescontoObserver;
+use App\Observers\DescontoProdutoObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -32,5 +36,8 @@ class AppServiceProvider extends ServiceProvider
                 ]
             ]);
         });
+
+        Desconto::observe(DescontoObserver::class);
+        DescontoProduto::observe(DescontoProdutoObserver::class);
     }
 }

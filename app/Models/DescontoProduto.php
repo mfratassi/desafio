@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Node\Expr\Cast\Double;
-
-use function PHPUnit\Framework\returnSelf;
-use function PHPUnit\Framework\returnValue;
 
 class DescontoProduto extends Model
 {
     use HasFactory;
-    protected $guarded = ['valor'];
+    use HasEvents;
+    protected $guarded = [];
 
     public function campanha()
     {

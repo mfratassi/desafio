@@ -14,7 +14,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
+        return Produto::all();
     }
 
     /**
@@ -25,7 +25,8 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        return Produto::create($request->all());
+        $p = Produto::create($request->all());
+        return redirect()->route('produtos.show', $p->id);
     }
 
     /**

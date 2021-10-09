@@ -18,8 +18,8 @@ class GruposCidadesSeeder extends Seeder
      */
     public function run()
     {
-        GruposCidade::factory(random_int(1,5))
-            ->has(Cidade::factory()->count(random_int(1,5)))
+        GruposCidade::factory(random_int(1,1))
+            ->has(Cidade::factory()->count(random_int(1,2)))
         ->create();
     }
 }

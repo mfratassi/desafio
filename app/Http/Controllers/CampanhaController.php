@@ -10,15 +10,58 @@ use Illuminate\Http\Request;
 
 class CampanhaController extends Controller
 {
-
-    public function add_produto($campanha, $produto)
+    
+    /**
+     * Adiciona um produto a uma campanha
+     *
+     * @param int $campanha_id
+     * @param int $produto_id
+     * @return void
+     */
+    public function add_produto(Request $request, int $campanha_id, int $produto_id)
     {
-        $vl = Produto::find($produto)->valor;
-        $dp = DescontoProduto::create([
-            'campanha_id' => $campanha, 
-            'produto_id' => $produto
-        ]);
-        return redirect()->route('campanhas.show', $campanha);
+        $vl = Produto::find($produto_id)->valor;
+        $dp = DescontoProduto::where([
+            'produto_id' => $produto_id, 
+            'campanha_id' => $campanha_id
+        ])->first();
+
+        if ($dp){
+            $dp->update([
+                'quantidade' => $dp->quantidade+1
+            ]);
+        }else {
+            $dp = DescontoProduto::create([
+                'campanha_id' => $campanha_id, 
+                'produto_id' => $produto_id, 
+                'quantidade' => 1,
+            ]);
+        }
+
+        if ($desc = $request->desconto){
+
+            $dp = DescontoProduto::where([
+                'produto_id' => $produto_id, 
+                'campanha_id' => $campanha_id
+            ])->first();
+            
+            if ($d = Desconto::find($dp->id)){
+                $d->update([
+                    'valor' => $desc
+                ]);
+            }else {
+                Desconto::create([
+                    'desconto_produto_id' => $dp->id, 
+                    'valor' => $desc
+                ]);
+            }
+
+            $dp->update([
+                'quantidade' => $dp->quantidade
+            ]);
+        }
+
+        return redirect()->route('campanhas.show', $campanha_id);
     }
 
     /**

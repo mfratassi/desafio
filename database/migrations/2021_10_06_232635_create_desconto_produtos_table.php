@@ -26,7 +26,8 @@ class CreateDescontoProdutosTable extends Migration
                 ->cascadeOnUpdate();
 
             $table->unsignedDecimal('valor')->default(0.0);
-            $table->unsignedDecimal('valorTotal')->default(0.0);
+            $table->unsignedDecimal('subtotal')->default(0.0);
+            $table->unsignedDecimal('subtotalComDesconto')->default(0.0);
             $table->unsignedBigInteger('quantidade')->default(0);
 
             

@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Desconto;
 use App\Models\DescontoProduto;
+use App\Models\Produto;
 use App\Observers\DescontoObserver;
 use App\Observers\DescontoProdutoObserver;
+use App\Observers\ProdutoObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -37,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
+        Produto::observe(ProdutoObserver::class);
         Desconto::observe(DescontoObserver::class);
         DescontoProduto::observe(DescontoProdutoObserver::class);
     }

@@ -8,13 +8,7 @@ use App\Models\Produto;
 
 class DescontoProdutoObserver
 {
-    /**
-     * Aplica valor com desconto sobre um produto em uma campanha
-     *
-     * @param DescontoProduto $dp
-     * @return void
-     */
-    public function creating(DescontoProduto $dp)
+    public function saving(DescontoProduto $dp)
     {
         $dsc = Desconto::where('desconto_produto_id', $dp->id)->first(); 
         $dsc = $dsc ? $dsc->valor : 0.0;
@@ -23,17 +17,8 @@ class DescontoProdutoObserver
         
         $valor = (1 - $dsc)  * $vl;
         $dp->valor = $valor;
-    }
-
-    /**
-     * Computa subtotal de um produto em uma campanha
-     *
-     * @param DescontoProduto $dp
-     * @return void
-     */
-    public function updating(DescontoProduto $dp)
-    {
-        $dp->valorTotal = $dp->quantidade * $dp->valor;
+        $dp->subTotal = $dp->quantidade * $dp->produto()->first()->valor;
+        $dp->subTotalComDesconto = $dp->quantidade * $dp->valor;
     }
 
 }

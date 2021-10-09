@@ -9,6 +9,8 @@ class Desconto extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $primaryKey = 'desconto_produto_id';
+
 
     public function produto()
     {

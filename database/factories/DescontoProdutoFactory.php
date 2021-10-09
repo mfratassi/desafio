@@ -22,7 +22,7 @@ class DescontoProdutoFactory extends Factory
     public function definition()
     {
         return [
-            'quantidade' => random_int(0, 20)
+            'quantidade' => random_int(0, 4)
         ];
     }
 }

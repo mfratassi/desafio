@@ -24,7 +24,7 @@ class DescontosProdutosSeeder extends Seeder
                     'grupo_id' => $grupo->id
                 ];
             })->has(
-                DescontoProduto::factory()->count(random_int(0,4))->state(function(){
+                DescontoProduto::factory()->count(random_int(1,3))->state(function(){
                     return [
                         'produto_id' => Produto::inRandomOrder()->first()
                     ];

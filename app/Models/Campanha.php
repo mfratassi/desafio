@@ -12,7 +12,7 @@ class Campanha extends Model
 
     public function gruposcidade()
     {
-        return $this->belongsTo(GruposCidade::class, 'grupo_id', 'id');
+        return $this->belongsTo(GruposCidade::class, 'grupo_id', 'id')->nullable();
     }
     
     public function descontoproduto()

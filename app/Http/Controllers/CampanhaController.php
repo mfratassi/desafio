@@ -18,9 +18,8 @@ class CampanhaController extends Controller
      * @param int $produto_id
      * @return void
      */
-    public function add_produto(Request $request, int $campanha_id, int $produto_id)
+    public function adicionar_produto(Request $request, $campanha_id, $produto_id)
     {
-        $vl = Produto::find($produto_id)->valor;
         $dp = DescontoProduto::where([
             'produto_id' => $produto_id, 
             'campanha_id' => $campanha_id
@@ -59,6 +58,37 @@ class CampanhaController extends Controller
             $dp->update([
                 'quantidade' => $dp->quantidade
             ]);
+        }
+
+        return redirect()->route('campanhas.show', $campanha_id);
+    }
+
+    public function subtrair_produto($campanha_id, $produto_id)
+    {
+        if ($dp = DescontoProduto::where([
+            'campanha_id' => $campanha_id, 
+            'produto_id' => $produto_id
+        ])->first()){
+            $qt = $dp->quantidade;
+            if ($qt > 1){
+                $dp->quantidade = $qt - 1; 
+                $dp->save();
+            }
+            elseif ($qt == 1){
+                //Emitir alerta antes de excluir o produto da campanha 
+                $dp->delete();
+            }
+        }
+        return redirect()->route('campanhas.show', $campanha_id);
+    }
+
+    public function remover_produto($campanha_id, $produto_id)
+    {
+        if ($dp = DescontoProduto::where([
+            'campanha_id' => $campanha_id, 
+            'produto_id' => $produto_id
+        ])->first()){
+            $dp->delete();
         }
 
         return redirect()->route('campanhas.show', $campanha_id);
@@ -103,7 +133,7 @@ class CampanhaController extends Controller
             'descontoproduto',
             'descontoproduto.produto', 
             'descontoproduto.desconto'
-        ])->findOrFail($id);
+        ])->find($id);
     }
 
     /**
@@ -115,7 +145,7 @@ class CampanhaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $c = Campanha::findOrFail($id); 
+        $c = Campanha::find($id); 
 
         $c->update($request->all());
         
@@ -130,7 +160,7 @@ class CampanhaController extends Controller
      */
     public function destroy($id)
     {
-        $c = Campanha::findOrFail($id); 
+        $c = Campanha::find($id); 
 
         if ($c->delete())
             return redirect()->route('campanhas.index');

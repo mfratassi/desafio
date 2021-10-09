@@ -50,7 +50,7 @@ class DescontoController extends Controller
     {
         $desconto = Desconto::findOrFail($id);
         $desconto->update($request->all());
-        return redirect()->route('desconto.show', $desconto->id);
+        return redirect()->route('descontos.show', $id);
     }
 
     /**
@@ -63,6 +63,6 @@ class DescontoController extends Controller
     {
         $desconto = Desconto::findOrFail($id);
         if ($desconto->delete())
-            return redirect()->route('desconto.index');
+            return redirect()->route('descontos.index');
     }
 }

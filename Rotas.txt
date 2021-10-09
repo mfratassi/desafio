@@ -1,35 +1,39 @@
-+--------+-----------+--------------------------------------------+--------------------------+------------------------------------------------------------------------+------------+
-|        | POST      | adminlte/darkmode/toggle                   | adminlte.darkmode.toggle | JeroenNoten\LaravelAdminLte\Http\Controllers\DarkModeController@toggle | web        |
-|        | GET|HEAD  | api/campanhas                              | campanhas.index          | App\Http\Controllers\CampanhaController@index                          | api        |
-|        | POST      | api/campanhas                              | campanhas.store          | App\Http\Controllers\CampanhaController@store                          | api        |
-|        | GET|HEAD  | api/campanhas/{campanha}                   | campanhas.show           | App\Http\Controllers\CampanhaController@show                           | api        |
-|        | PUT|PATCH | api/campanhas/{campanha}                   | campanhas.update         | App\Http\Controllers\CampanhaController@update                         | api        |
-|        | DELETE    | api/campanhas/{campanha}                   | campanhas.destroy        | App\Http\Controllers\CampanhaController@destroy                        | api        |
-|        | GET|HEAD  | api/cidades                                | cidades.index            | App\Http\Controllers\CidadeController@index                            | api        |
-|        | POST      | api/cidades                                | cidades.store            | App\Http\Controllers\CidadeController@store                            | api        |
-|        | GET|HEAD  | api/cidades/{cidade}                       | cidades.show             | App\Http\Controllers\CidadeController@show                             | api        |
-|        | PUT|PATCH | api/cidades/{cidade}                       | cidades.update           | App\Http\Controllers\CidadeController@update                           | api        |
-|        | DELETE    | api/cidades/{cidade}                       | cidades.destroy          | App\Http\Controllers\CidadeController@destroy                          | api        |
-|        | GET|HEAD  | api/desconto                               | desconto.index           | App\Http\Controllers\DescontoController@index                          | api        |
-|        | POST      | api/desconto                               | desconto.store           | App\Http\Controllers\DescontoController@store                          | api        |
-|        | GET|HEAD  | api/desconto/{desconto}                    | desconto.show            | App\Http\Controllers\DescontoController@show                           | api        |
-|        | PUT|PATCH | api/desconto/{desconto}                    | desconto.update          | App\Http\Controllers\DescontoController@update                         | api        |
-|        | DELETE    | api/desconto/{desconto}                    | desconto.destroy         | App\Http\Controllers\DescontoController@destroy                        | api        |
-|        | GET|HEAD  | api/estados                                | estados.index            | App\Http\Controllers\EstadoController@index                            | api        |
-|        | POST      | api/estados                                | estados.store            | App\Http\Controllers\EstadoController@store                            | api        |
-|        | GET|HEAD  | api/estados/{estado}                       | estados.show             | App\Http\Controllers\EstadoController@show                             | api        |
-|        | PUT|PATCH | api/estados/{estado}                       | estados.update           | App\Http\Controllers\EstadoController@update                           | api        |
-|        | DELETE    | api/estados/{estado}                       | estados.destroy          | App\Http\Controllers\EstadoController@destroy                          | api        |
-|        | GET|HEAD  | api/grupos                                 | grupos.index             | App\Http\Controllers\GruposCidadeController@index                      | api        |
-|        | POST      | api/grupos                                 | grupos.store             | App\Http\Controllers\GruposCidadeController@store                      | api        |
-|        | GET|HEAD  | api/grupos/{grupo}                         | grupos.show              | App\Http\Controllers\GruposCidadeController@show                       | api        |
-|        | PUT|PATCH | api/grupos/{grupo}                         | grupos.update            | App\Http\Controllers\GruposCidadeController@update                     | api        |
-|        | DELETE    | api/grupos/{grupo}                         | grupos.destroy           | App\Http\Controllers\GruposCidadeController@destroy                    | api        |
-|        | POST      | api/grupos/{grupo}/add_campanha/{campanha} |                          | App\Http\Controllers\GruposCidadeController@add_campanha               | api        |
-|        | GET|HEAD  | api/produtos                               | produtos.index           | App\Http\Controllers\ProdutoController@index                           | api        |
-|        | POST      | api/produtos                               | produtos.store           | App\Http\Controllers\ProdutoController@store                           | api        |
-|        | GET|HEAD  | api/produtos/{produto}                     | produtos.show            | App\Http\Controllers\ProdutoController@show                            | api        |
-|        | PUT|PATCH | api/produtos/{produto}                     | produtos.update          | App\Http\Controllers\ProdutoController@update                          | api        |
-|        | DELETE    | api/produtos/{produto}                     | produtos.destroy         | App\Http\Controllers\ProdutoController@destroy                         | api        |
-|        | GET|HEAD  | sanctum/csrf-cookie                        |                          | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show             | web        |
-+--------+-----------+--------------------------------------------+--------------------------+------------------------------------------------------------------------+------------+
++--------+-----------+------------------------------------------------------+--------------------------+------------------------------------------------------------------------+------------+
+|        | POST      | adminlte/darkmode/toggle                             | adminlte.darkmode.toggle | JeroenNoten\LaravelAdminLte\Http\Controllers\DarkModeController@toggle | web        |
+|        | GET|HEAD  | api/campanhas                                        | campanhas.index          | App\Http\Controllers\CampanhaController@index                          | api        |
+|        | POST      | api/campanhas                                        | campanhas.store          | App\Http\Controllers\CampanhaController@store                          | api        |
+|        | GET|HEAD  | api/campanhas/{campanha}                             | campanhas.show           | App\Http\Controllers\CampanhaController@show                           | api        |
+|        | PUT|PATCH | api/campanhas/{campanha}                             | campanhas.update         | App\Http\Controllers\CampanhaController@update                         | api        |
+|        | DELETE    | api/campanhas/{campanha}                             | campanhas.destroy        | App\Http\Controllers\CampanhaController@destroy                        | api        |
+|        | POST      | api/campanhas/{campanha}/adicionar_produto/{produto} |                          | App\Http\Controllers\CampanhaController@adicionar_produto              | api        |
+|        | POST      | api/campanhas/{campanha}/remover_produto/{produto}   |                          | App\Http\Controllers\CampanhaController@remover_produto                | api        |
+|        | POST      | api/campanhas/{campanha}/subtrair_produto/{produto}  |                          | App\Http\Controllers\CampanhaController@subtrair_produto               | api        |
+|        | GET|HEAD  | api/cidades                                          | cidades.index            | App\Http\Controllers\CidadeController@index                            | api        |
+|        | POST      | api/cidades                                          | cidades.store            | App\Http\Controllers\CidadeController@store                            | api        |
+|        | GET|HEAD  | api/cidades/{cidade}                                 | cidades.show             | App\Http\Controllers\CidadeController@show                             | api        |
+|        | PUT|PATCH | api/cidades/{cidade}                                 | cidades.update           | App\Http\Controllers\CidadeController@update                           | api        |
+|        | DELETE    | api/cidades/{cidade}                                 | cidades.destroy          | App\Http\Controllers\CidadeController@destroy                          | api        |
+|        | GET|HEAD  | api/descontos                                        | descontos.index          | App\Http\Controllers\DescontoController@index                          | api        |
+|        | POST      | api/descontos                                        | descontos.store          | App\Http\Controllers\DescontoController@store                          | api        |
+|        | GET|HEAD  | api/descontos/{desconto}                             | descontos.show           | App\Http\Controllers\DescontoController@show                           | api        |
+|        | PUT|PATCH | api/descontos/{desconto}                             | descontos.update         | App\Http\Controllers\DescontoController@update                         | api        |
+|        | DELETE    | api/descontos/{desconto}                             | descontos.destroy        | App\Http\Controllers\DescontoController@destroy                        | api        |
+|        | GET|HEAD  | api/estados                                          | estados.index            | App\Http\Controllers\EstadoController@index                            | api        |
+|        | POST      | api/estados                                          | estados.store            | App\Http\Controllers\EstadoController@store                            | api        |
+|        | GET|HEAD  | api/estados/{estado}                                 | estados.show             | App\Http\Controllers\EstadoController@show                             | api        |
+|        | PUT|PATCH | api/estados/{estado}                                 | estados.update           | App\Http\Controllers\EstadoController@update                           | api        |
+|        | DELETE    | api/estados/{estado}                                 | estados.destroy          | App\Http\Controllers\EstadoController@destroy                          | api        |
+|        | GET|HEAD  | api/grupos                                           | grupos.index             | App\Http\Controllers\GruposCidadeController@index                      | api        |
+|        | POST      | api/grupos                                           | grupos.store             | App\Http\Controllers\GruposCidadeController@store                      | api        |
+|        | GET|HEAD  | api/grupos/{grupo}                                   | grupos.show              | App\Http\Controllers\GruposCidadeController@show                       | api        |
+|        | PUT|PATCH | api/grupos/{grupo}                                   | grupos.update            | App\Http\Controllers\GruposCidadeController@update                     | api        |
+|        | DELETE    | api/grupos/{grupo}                                   | grupos.destroy           | App\Http\Controllers\GruposCidadeController@destroy                    | api        |
+|        | POST      | api/grupos/{grupo}/adicionar_campanha/{campanha}     |                          | App\Http\Controllers\GruposCidadeController@adicionar_campanha         | api        |
+|        | POST      | api/grupos/{grupo}/remover_campanha                  |                          | App\Http\Controllers\GruposCidadeController@remover_campanha           | api        |
+|        | GET|HEAD  | api/produtos                                         | produtos.index           | App\Http\Controllers\ProdutoController@index                           | api        |
+|        | POST      | api/produtos                                         | produtos.store           | App\Http\Controllers\ProdutoController@store                           | api        |
+|        | GET|HEAD  | api/produtos/{produto}                               | produtos.show            | App\Http\Controllers\ProdutoController@show                            | api        |
+|        | PUT|PATCH | api/produtos/{produto}                               | produtos.update          | App\Http\Controllers\ProdutoController@update                          | api        |
+|        | DELETE    | api/produtos/{produto}                               | produtos.destroy         | App\Http\Controllers\ProdutoController@destroy                         | api        |
+|        | GET|HEAD  | sanctum/csrf-cookie                                  |                          | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show             | web        |
++--------+-----------+------------------------------------------------------+--------------------------+------------------------------------------------------------------------+------------+

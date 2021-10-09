@@ -25,11 +25,14 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('grupos/{grupo}/add_campanha/{campanha}', [GruposCidadeController::class, 'add_campanha']);
+Route::post('grupos/{grupo}/adicionar_campanha/{campanha}', [GruposCidadeController::class, 'adicionar_campanha']);
+Route::post('grupos/{grupo}/remover_campanha/', [GruposCidadeController::class, 'remover_campanha']);
 Route::apiResource('grupos', GruposCidadeController::class);
 Route::apiResource('cidades', CidadeController::class);
 Route::apiResource('estados', EstadoController::class);
-Route::post('campanhas/{campanha}/add_produto/{produto}', [CampanhaController::class, 'add_produto']);
+Route::post('campanhas/{campanha}/adicionar_produto/{produto}', [CampanhaController::class, 'adicionar_produto']);
+Route::post('campanhas/{campanha}/subtrair_produto/{produto}', [CampanhaController::class, 'subtrair_produto']);
+Route::post('campanhas/{campanha}/remover_produto/{produto}', [CampanhaController::class, 'remover_produto']);
 Route::apiResource('campanhas', CampanhaController::class);
 Route::apiResource('produtos', ProdutoController::class);
 Route::apiResource('descontos', DescontoController::class);

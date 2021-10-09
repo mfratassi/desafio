@@ -17,11 +17,11 @@ class GruposCidadeController extends Controller
      * @param [type] $id
      * @return void
      */
-    public function add_campanha($g_id, $c_id)
+    public function adicionar_campanha($grupo_id, $campanha_id)
     {
-        $g = GruposCidade::findOrFail($g_id);
-        $c = Campanha::findOrFail($c_id);
+        $c = Campanha::findOrFail($campanha_id);
 
+        //Exibir aviso que a campanha já está em outro produto
         if ($c->grupo_id){
             $c->update([
                 'grupo_id' => null
@@ -29,10 +29,20 @@ class GruposCidadeController extends Controller
         }
 
         $c->update([
-            'grupo_id' => $g_id
+            'grupo_id' => $grupo_id
         ]);
 
-        redirect()->route('campanhas.show', $c_id);
+        return redirect()->route('grupos.show', $grupo_id);
+    }
+
+    public function remover_campanha($grupo_id)
+    {
+        if($c = Campanha::firstWhere('grupo_id', $grupo_id)){
+            $c->grupo_id = null;
+            $c->save();
+            GruposCidade::find($grupo_id)->save();
+        }
+        return redirect()->route('grupos.show', $grupo_id);
     }
 
     /**

@@ -10,11 +10,53 @@ use Illuminate\Http\Request;
 
 class GruposCidadeController extends Controller
 {
+
+    /**
+     * Relaciona uma cidade com um grupo de cidades
+     *
+     * @param integer $grupo_id
+     * @param integer $cidade_id
+     * @return void
+     */
+    public function adicionar_cidade(int $grupo_id, int $cidade_id)
+    {
+        if ($g = GruposCidade::find($grupo_id) && 
+            $c = Cidade::find($cidade_id)){
+
+            $c->update([
+                'grupo_id' => $grupo_id
+            ]);
+        }
+
+        return redirect()->route('grupos.show', $grupo_id);
+    }
+
+    /**
+     * Exclui relação de uma cidade com um grupo de cidades
+     *
+     * @param integer $grupo_id
+     * @param integer $cidade_id
+     * @return void
+     */
+    public function remover_cidade(int $grupo_id, int $cidade_id)
+    {
+        if ($g = GruposCidade::find($grupo_id) && 
+            $c = Cidade::find($cidade_id)){
+
+            $c->update([
+                'grupo_id' => null
+            ]);
+        }
+
+        return redirect()->route('grupos.show', $grupo_id);
+    }
+
     /**
      * Adiciona uma campanha a um grupo se ele existir e se não tiver
      * 
      * @param Request $request
-     * @param [type] $id
+     * @param int $grupo_id
+     * @param int $campanha_id
      * @return void
      */
     public function adicionar_campanha($grupo_id, $campanha_id)
@@ -35,6 +77,12 @@ class GruposCidadeController extends Controller
         return redirect()->route('grupos.show', $grupo_id);
     }
 
+    /**
+     * Remove relação da campanha com o grupo
+     *
+     * @param int $grupo_id
+     * @return void
+     */
     public function remover_campanha($grupo_id)
     {
         if($c = Campanha::firstWhere('grupo_id', $grupo_id)){
@@ -70,9 +118,8 @@ class GruposCidadeController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->except("_token");
-        GruposCidade::create($data);
-        return redirect()->route('grupos.index');
+        if ($grupo = GruposCidade::create($request->all()))
+            return redirect()->route('grupos.show', $grupo->id);
     }
 
     /**
@@ -102,13 +149,8 @@ class GruposCidadeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->except([
-            '_token', 
-            '_method'
-        ]);
-        
         $grupo = GruposCidade::find($id);
-        $grupo->update($data);        
+        $grupo->update($request->all);        
 
         return redirect()->route('grupos.show', $grupo->id);
     }

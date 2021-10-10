@@ -25,6 +25,7 @@ class CampanhaController extends Controller
             'campanha_id' => $campanha_id
         ])->first();
 
+        //Quantidade
         if ($dp){
             $dp->update([
                 'quantidade' => $dp->quantidade+1
@@ -37,6 +38,7 @@ class CampanhaController extends Controller
             ]);
         }
 
+        //Desconto ($request->desconto)
         if ($desc = $request->desconto){
 
             $dp = DescontoProduto::where([
